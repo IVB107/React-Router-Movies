@@ -7,11 +7,22 @@ export default class SavedList extends Component {
   }
 
   render() {
+    if (this.props.list.length < 1){
+      return (
+      <div className="saved-list">
+        <h3>Saved Movies:</h3>
+        <p>You haven't saved any movies yet.</p>
+        <Link to='/'>
+          <div className="home-button">Home</div>
+        </Link>
+      </div>
+      )
+    }
     return (
       <div className="saved-list">
         <h3>Saved Movies:</h3>
         {this.props.list.map(movie => (
-          <span className="saved-movie">{movie.title}</span>
+          <span key={movie.title} className="saved-movie">{movie.title}</span>
         ))}
         <Link to='/'>
           <div className="home-button">Home</div>
