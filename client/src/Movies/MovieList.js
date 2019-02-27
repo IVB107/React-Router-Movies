@@ -22,33 +22,19 @@ export default class MovieList extends Component {
       });
   }
 
-  saveMovie = (movie) => {
-    const addToSavedList = this.props.addToSavedList;
-    addToSavedList(movie)
-  }
-
   render() {
     return (
       <div className="movie-list">
         {this.state.movies.map(movie => (
-          <MovieDetails saveMovie={this.saveMovie} key={movie.id} movie={movie} />
+          // <MovieDetails saveMovie={this.saveMovie} key={movie.id} movie={movie} />
+          <Link to={`/movies/${movie.id}`} key={movie.id}>
+            <MovieCard 
+              {...movie}
+              saveMovie={() => this.props.addToSavedList(movie)}
+            />
+          </Link>
         ))}
       </div>
     );
   }
-}
-
-function MovieDetails({ movie, saveMovie }) {
-  const { title, director, metascore, stars } = movie;
-  return (
-    <Link to={`/movies/${movie.id}`}>
-      <MovieCard 
-        title={title}
-        director={director}s
-        metascore={metascore}
-        stars={stars}
-        saveMovie={() => saveMovie(movie)}
-      />
-    </Link>
-  );
 }
